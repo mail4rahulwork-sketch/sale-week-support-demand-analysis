@@ -1,0 +1,11 @@
+,value
+orders_peak_day,0
+tickets_peak_day,2
+tickets_sale_day,2280
+tickets_peak,2552
+agents_normal,33
+extra_agent_days,49
+worst_backlog_A,310
+worst_backlog_B,170
+backlog_end_A,310
+backlog_end_B,170
