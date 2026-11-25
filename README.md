@@ -1,12 +1,25 @@
-# Sale-Week Ticket Wave
+# Sale-Week Support Demand: Where Should the Extra Budget Go?
 
 ![Python](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white) ![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white) ![Data](https://img.shields.io/badge/data-simulated-lightgrey) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
 **Orders peak on sale day. Support tickets don't.**
 
-Every big sale in Indian e-commerce (Black Friday, festive sales, end of season) gets planned around the order spike. But customers don't write in on the day they order. They write in when the parcel is late, and again when they want to return it. This small simulator shows how that changes the staffing plan.
-
 > All data is simulated. No company or customer data is used.
+
+## Business problem
+
+Every big sale in Indian e-commerce gets a fixed extra support budget, and it is usually spent on sale day because that is when orders spike. But customers write in when the parcel is late or when they want to return it. The business question: with the same extra budget, which plan leaves fewer customers waiting?
+
+| | |
+|---|---|
+| **Who asks** | CX head, operations planning, finance |
+| **Data used** | Order volume around the sale, tickets per 100 orders by contact reason, when each reason arrives, and handle time |
+| **Approach** | Modelled ticket demand by contact reason with realistic delays, converted it into workload, and compared two plans with exactly the same extra spend |
+
+## Recommendation
+
+1. Spread the extra people across the 5 to 7 days after the sale, peaking on Day 2, instead of doubling the team on sale day. Same budget, about 45% less backlog.
+2. Track tickets per 100 orders daily during the sale. If it climbs faster than normal, something broke upstream (a courier or payment gateway) and needs action within hours.
 
 ```mermaid
 ---
@@ -24,7 +37,7 @@ xychart-beta
 ```
 <sub>Tickets are shown in 25s so both fit on one chart. Real numbers are in the table below.</sub>
 
-## How it works
+## Analysis
 
 Orders jump to 3x on sale day and settle over two days. Each order can turn into a ticket later, and the reason decides when:
 
@@ -39,7 +52,7 @@ Workload is turned into agents at 30% shrinkage and 85% occupancy. Then two plan
 - **Plan A, staff the sale day:** double the team on Day 0, +50% on Day 1, back to normal after.
 - **Plan B, staff the wave:** spread the same extra people across the days the tickets actually land.
 
-## What it shows
+## Findings
 
 | Day | Orders | Tickets | Agents needed | Plan A | Plan B | Backlog A (hrs) | Backlog B (hrs) |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -80,20 +93,14 @@ python sale_week_wave.py
 
 Writes `outputs/sale_week_plan.csv`, `outputs/summary.csv` and a chart `outputs/sale_week_wave.png`. Change the rates, lags or uplift at the top of the script to match your own business.
 
-## Skills shown
-
-Demand forecasting by contact reason · Lagged demand · Workload to FTE · Shrinkage and occupancy · Scenario comparison · Python (pandas, matplotlib)
-
----
-
 ## About me
 
-I'm Rahul, a Control Tower – WFM Analyst in Gurugram. I build these small projects to work through the planning problems I see on the job, using made-up data so nothing confidential leaves work.
+I'm Rahul, a Business Analyst in operations and CX analytics, based in Gurugram (currently at Shiprocket, before that DTDC Express). I build these small case studies on made-up data to practise the kind of business questions I work on, so nothing confidential leaves work. Feedback is welcome.
 
 [LinkedIn](https://www.linkedin.com/in/rahul-219543159/) · [GitHub profile](https://github.com/mail4rahulwork-sketch)
 
-**Other projects**
-- [Contact Centre WFM Dashboard (Power BI, live demo)](https://github.com/mail4rahulwork-sketch/powerbi-contact-centre-wfm-dashboard)
-- [WFM Forecast to Erlang C Staffing](https://github.com/mail4rahulwork-sketch/wfm-forecast-erlang-staffing)
-- [Intraday RTA Early Warning](https://github.com/mail4rahulwork-sketch/intraday-rta-early-warning)
-- [Headcount Capacity Plan](https://github.com/mail4rahulwork-sketch/contact-centre-headcount-capacity-plan)
+**Other case studies**
+- [Why did service level collapse in the festive peak? (Power BI)](https://github.com/mail4rahulwork-sketch/service-performance-powerbi-analysis)
+- [Peak-season hiring plan: when to hire, and how many?](https://github.com/mail4rahulwork-sketch/peak-season-hiring-plan-analysis)
+- [SLA early-warning rules: is acting early worth the cost?](https://github.com/mail4rahulwork-sketch/sla-early-warning-analysis)
+- [Demand forecast to staffing cost: how much can we save?](https://github.com/mail4rahulwork-sketch/demand-forecast-staffing-cost-analysis)
